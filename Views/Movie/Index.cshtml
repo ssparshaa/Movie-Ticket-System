@@ -1,0 +1,32 @@
+@model List<MovieTicketAppFinal.Models.Movie>
+@{ ViewData["Title"] = "Movies"; }
+<div class="top-bar">
+    <h1>Movies</h1>
+    <a href="/Movie/Create" class="btn btn-primary">+ Add Movie</a>
+</div>
+@if (TempData["Error"] != null)
+{
+    <p style="color:red;font-weight:bold;margin-bottom:1rem;">@TempData["Error"]</p>
+}
+<table>
+    <thead><tr><th>ID</th><th>Name</th><th>Genre</th><th>Language</th><th>Duration</th><th>Release Date</th><th>Actions</th></tr></thead>
+    <tbody>
+    @foreach (var m in Model)
+    {
+        <tr>
+            <td>@m.MovieId</td>
+            <td>@m.MovieName</td>
+            <td>@m.MovieGenre</td>
+            <td>@m.MovieLanguage</td>
+            <td>@(m.MovieDuration.HasValue ? m.MovieDuration + " min" : "-")</td>
+            <td>@(m.MovieReleaseDate.HasValue ? m.MovieReleaseDate.Value.ToString("MMM dd, yyyy") : "-")</td>
+            <td class="actions">
+                <a href="/Movie/Edit/@m.MovieId" class="btn btn-secondary">Edit</a>
+                <form method="post" action="/Movie/Delete/@m.MovieId" style="display:inline">
+                    <button type="submit" class="btn btn-danger" onclick="return confirm('Delete this movie?')">Delete</button>
+                </form>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

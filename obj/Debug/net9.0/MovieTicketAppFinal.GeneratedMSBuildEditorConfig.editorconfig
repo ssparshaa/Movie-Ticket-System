@@ -1,0 +1,147 @@
+is_global = true
+build_property.TargetFramework = net9.0
+build_property.TargetFrameworkIdentifier = .NETCoreApp
+build_property.TargetFrameworkVersion = v9.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = MovieTicketAppFinal
+build_property.RootNamespace = MovieTicketAppFinal
+build_property.ProjectDir = /Users/sparshashrestha/RiderProjects/MovieTicketAppFinal/MovieTicketAppFinal/
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 9.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = /Users/sparshashrestha/RiderProjects/MovieTicketAppFinal/MovieTicketAppFinal
+build_property._RazorSourceGeneratorDebug = 
+build_property.EffectiveAnalysisLevelStyle = 9.0
+build_property.EnableCodeStyleSeverity = 
+
+[/Users/sparshashrestha/RiderProjects/MovieTicketAppFinal/MovieTicketAppFinal/Views/Complex/OccupancyPerformer.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ29tcGxleC9PY2N1cGFuY3lQZXJmb3JtZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/sparshashrestha/RiderProjects/MovieTicketAppFinal/MovieTicketAppFinal/Views/Complex/TheaterMovie.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ29tcGxleC9UaGVhdGVyTW92aWUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/sparshashrestha/RiderProjects/MovieTicketAppFinal/MovieTicketAppFinal/Views/Complex/UserTicket.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ29tcGxleC9Vc2VyVGlja2V0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/sparshashrestha/RiderProjects/MovieTicketAppFinal/MovieTicketAppFinal/Views/Customer/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ3VzdG9tZXIvQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/sparshashrestha/RiderProjects/MovieTicketAppFinal/MovieTicketAppFinal/Views/Customer/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ3VzdG9tZXIvRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/sparshashrestha/RiderProjects/MovieTicketAppFinal/MovieTicketAppFinal/Views/Customer/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ3VzdG9tZXIvSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/sparshashrestha/RiderProjects/MovieTicketAppFinal/MovieTicketAppFinal/Views/Hall/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSGFsbC9DcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/sparshashrestha/RiderProjects/MovieTicketAppFinal/MovieTicketAppFinal/Views/Hall/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSGFsbC9FZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/sparshashrestha/RiderProjects/MovieTicketAppFinal/MovieTicketAppFinal/Views/Hall/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSGFsbC9JbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/sparshashrestha/RiderProjects/MovieTicketAppFinal/MovieTicketAppFinal/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9JbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/sparshashrestha/RiderProjects/MovieTicketAppFinal/MovieTicketAppFinal/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9Qcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/sparshashrestha/RiderProjects/MovieTicketAppFinal/MovieTicketAppFinal/Views/Movie/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTW92aWUvQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/sparshashrestha/RiderProjects/MovieTicketAppFinal/MovieTicketAppFinal/Views/Movie/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTW92aWUvRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/sparshashrestha/RiderProjects/MovieTicketAppFinal/MovieTicketAppFinal/Views/Movie/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTW92aWUvSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/sparshashrestha/RiderProjects/MovieTicketAppFinal/MovieTicketAppFinal/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/sparshashrestha/RiderProjects/MovieTicketAppFinal/MovieTicketAppFinal/Views/Show/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hvdy9DcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/sparshashrestha/RiderProjects/MovieTicketAppFinal/MovieTicketAppFinal/Views/Show/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hvdy9FZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/sparshashrestha/RiderProjects/MovieTicketAppFinal/MovieTicketAppFinal/Views/Show/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hvdy9JbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/sparshashrestha/RiderProjects/MovieTicketAppFinal/MovieTicketAppFinal/Views/Theater/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVGhlYXRlci9DcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/sparshashrestha/RiderProjects/MovieTicketAppFinal/MovieTicketAppFinal/Views/Theater/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVGhlYXRlci9FZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/sparshashrestha/RiderProjects/MovieTicketAppFinal/MovieTicketAppFinal/Views/Theater/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVGhlYXRlci9JbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/sparshashrestha/RiderProjects/MovieTicketAppFinal/MovieTicketAppFinal/Views/Ticket/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVGlja2V0L0NyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/sparshashrestha/RiderProjects/MovieTicketAppFinal/MovieTicketAppFinal/Views/Ticket/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVGlja2V0L0VkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/sparshashrestha/RiderProjects/MovieTicketAppFinal/MovieTicketAppFinal/Views/Ticket/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVGlja2V0L0luZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/sparshashrestha/RiderProjects/MovieTicketAppFinal/MovieTicketAppFinal/Views/Ticket/TicketOverview.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVGlja2V0L1RpY2tldE92ZXJ2aWV3LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/sparshashrestha/RiderProjects/MovieTicketAppFinal/MovieTicketAppFinal/Views/TicketPolicy/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVGlja2V0UG9saWN5L0NyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/sparshashrestha/RiderProjects/MovieTicketAppFinal/MovieTicketAppFinal/Views/TicketPolicy/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVGlja2V0UG9saWN5L0VkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/sparshashrestha/RiderProjects/MovieTicketAppFinal/MovieTicketAppFinal/Views/TicketPolicy/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVGlja2V0UG9saWN5L0luZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/sparshashrestha/RiderProjects/MovieTicketAppFinal/MovieTicketAppFinal/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/sparshashrestha/RiderProjects/MovieTicketAppFinal/MovieTicketAppFinal/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/sparshashrestha/RiderProjects/MovieTicketAppFinal/MovieTicketAppFinal/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-fm0blwvrg0

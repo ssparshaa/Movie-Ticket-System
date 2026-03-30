@@ -1,0 +1,147 @@
+@{
+    ViewData["Title"] = "Add Ticket";
+    var customers = ViewBag.Customers as List<MovieTicketAppFinal.Models.Customer>;
+    var movies = ViewBag.Movies as List<MovieTicketAppFinal.Models.Movie>;
+    var shows = ViewBag.Shows as List<MovieTicketAppFinal.Models.ShowOption>;
+}
+
+<h1>Add Ticket</h1>
+
+@if (TempData["Error"] != null)
+{
+    <p style="color:red;font-weight:bold;margin-bottom:1rem;">@TempData["Error"]</p>
+}
+
+<div asp-validation-summary="All" class="text-danger" style="margin-bottom:1rem;"></div>
+
+<div class="form-card">
+    <form method="post">
+
+        <div class="form-group">
+            <label>Ticket ID <span style="color:red;">*</span></label>
+            <input type="number" name="TicketId" required />
+        </div>
+
+        <div class="form-group">
+            <label>Customer <span style="color:red;">*</span></label>
+            <select name="customerId" required>
+                <option value="">-- Select Customer --</option>
+                @if (customers != null)
+                {
+                    @foreach (var c in customers)
+                    {
+                        <option value="@c.CustomerId">@c.CustomerName</option>
+                    }
+                }
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Movie <span style="color:red;">*</span></label>
+            <select name="movieId" id="movieId" required>
+                <option value="">-- Select Movie --</option>
+                @if (movies != null)
+                {
+                    @foreach (var m in movies)
+                    {
+                        <option value="@m.MovieId">@m.MovieName</option>
+                    }
+                }
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Show Time <span style="color:red;">*</span></label>
+            <select name="showId" id="showId" required>
+                <option value="" data-movie="">-- Select Movie first --</option>
+                @if (shows != null)
+                {
+                    @foreach (var s in shows)
+                    {
+                        <option value="@s.ShowId" data-movie="@s.MovieId">@s.DisplayText</option>
+                    }
+                }
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Status</label>
+            <select name="TicketStatus" id="statusSelect">
+                <option value="BOOKED">BOOKED</option>
+                <option value="PURCHASED">PURCHASED</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Seat No</label>
+            <input type="text" name="SeatNo" placeholder="e.g. A12" />
+        </div>
+
+        <div class="form-group">
+            <label>Booking Time</label>
+            <input type="datetime-local" name="TicketBookingTime" id="bookingTime" />
+        </div>
+
+        <div class="form-group" id="purchaseTimeGroup" style="display:none;">
+            <label>Purchase Time</label>
+            <input type="datetime-local" name="TicketPurchaseTime" id="purchaseTime" />
+        </div>
+
+        <div class="actions">
+            <button type="submit" class="btn btn-primary">Save</button>
+            <a href="/Ticket" class="btn btn-secondary">Cancel</a>
+        </div>
+
+    </form>
+</div>
+
+<script>
+    // Auto-fill booking time to now
+    (function () {
+        const now = new Date();
+        const pad = n => String(n).padStart(2, '0');
+        const el = document.getElementById('bookingTime');
+        if (el && !el.value)
+            el.value = `${now.getFullYear()}-${pad(now.getMonth()+1)}-${pad(now.getDate())}T${pad(now.getHours())}:${pad(now.getMinutes())}`;
+    })();
+
+    // Filter shows by selected movie
+    const movieSel = document.getElementById('movieId');
+    const showSel = document.getElementById('showId');
+    const allShowOptions = Array.from(showSel.options).slice(1);
+
+    movieSel.addEventListener('change', function () {
+        const movieId = parseInt(this.value) || 0;
+        while (showSel.options.length > 1) showSel.remove(1);
+
+        if (movieId === 0) {
+            showSel.options[0].text = '-- Select Movie first --';
+            return;
+        }
+
+        showSel.options[0].text = '-- Select Showtime --';
+        allShowOptions.forEach(opt => {
+            const optMovie = parseInt(opt.dataset.movie) || 0;
+            if (optMovie === movieId) showSel.appendChild(opt.cloneNode(true));
+        });
+    });
+
+    // Show/hide purchase time based on status
+    const statusSelect = document.getElementById('statusSelect');
+    const purchaseGroup = document.getElementById('purchaseTimeGroup');
+    const purchaseTime = document.getElementById('purchaseTime');
+
+    statusSelect.addEventListener('change', function () {
+        if (this.value === 'PURCHASED') {
+            purchaseGroup.style.display = '';
+            if (!purchaseTime.value) {
+                const now = new Date();
+                const pad = n => String(n).padStart(2, '0');
+                purchaseTime.value = `${now.getFullYear()}-${pad(now.getMonth()+1)}-${pad(now.getDate())}T${pad(now.getHours())}:${pad(now.getMinutes())}`;
+            }
+        } else {
+            purchaseGroup.style.display = 'none';
+            purchaseTime.value = '';
+        }
+    });
+</script>

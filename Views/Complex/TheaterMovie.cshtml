@@ -1,0 +1,79 @@
+@{
+    var theaters = ViewBag.Theaters as List<MovieTicketAppFinal.Models.Theater>;
+    var results = ViewBag.TheaterResults as List<MovieTicketAppFinal.Models.TheaterMovieResult>;
+    ViewData["Title"] = "Theater Hall Movie";
+}
+
+<h1>Theater & Hall Movies</h1>
+<p style="color:var(--muted);margin-bottom:1rem;">Select a theater to view all movies and showtimes across its halls.</p>
+
+<div class="form-card">
+    <form method="post">
+        <div class="form-group">
+            <label>Select Theater <span style="color:red;">*</span></label>
+            <select name="theaterId" required>
+                <option value="">-- Select Theater --</option>
+                @if (theaters != null)
+                {
+                    @foreach (var t in theaters)
+                    {
+                        if (ViewBag.SelectedTheaterId != null && (int)ViewBag.SelectedTheaterId == t.TheatreId)
+                        {
+                            <option value="@t.TheatreId" selected>@t.TheatreName</option>
+                        }
+                        else
+                        {
+                            <option value="@t.TheatreId">@t.TheatreName</option>
+                        }
+                    }
+                }
+            </select>
+        </div>
+        <div class="actions">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+    </form>
+</div>
+
+@if (results != null)
+{
+    if (!results.Any())
+    {
+        <p style="color:var(--muted);margin-top:1.5rem;">No showtimes found for this theater.</p>
+    }
+    else
+    {
+        <h2 style="margin-top:2rem;">Results — @results.First().TheaterName</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Hall</th>
+                    <th>Capacity</th>
+                    <th>Movie</th>
+                    <th>Language</th>
+                    <th>Genre</th>
+                    <th>Release Date</th>
+                    <th>Movie Duration</th>
+                    <th>Show Timing</th>
+                    <th>Show Duration</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var r in results)
+                {
+                    <tr>
+                        <td>@r.HallName</td>
+                        <td>@r.HallCapacity</td>
+                        <td>@r.MovieName</td>
+                        <td>@r.Language</td>
+                        <td>@r.Genre</td>
+                        <td>@(r.ReleaseDate.HasValue ? r.ReleaseDate.Value.ToString("dd MMM yyyy") : "-")</td>
+                        <td>@r.Duration min</td>
+                        <td>@(r.ShowTiming.HasValue ? r.ShowTiming.Value.ToString("dd MMM yyyy, hh:mm tt") : "-")</td>
+                        <td>@r.ShowDuration min</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+}

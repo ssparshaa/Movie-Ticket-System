@@ -1,0 +1,76 @@
+@model List<MovieTicketAppFinal.Models.UserTicketResult>
+@{ ViewData["Title"] = "Ticket Status Overview"; }
+
+<div class="top-bar">
+    <h1>Ticket Status Overview</h1>
+    <a href="/Ticket" class="btn btn-secondary">Back to Tickets</a>
+</div>
+
+@if (TempData["Error"] != null)
+{
+    <p style="color:red;font-weight:bold;margin-bottom:1rem;">@TempData["Error"]</p>
+}
+
+<table>
+    <thead>
+        <tr>
+            <th>Ticket ID</th>
+            <th>Customer</th>
+            <th>Contact</th>
+            <th>Movie</th>
+            <th>Theater</th>
+            <th>Hall</th>
+            <th>Show Time</th>
+            <th>Seat</th>
+            <th>Status</th>
+            <th>Policy</th>
+            <th>Price (Rs)</th>
+            <th>Booking Time</th>
+            <th>Purchase Time</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            @foreach (var r in Model)
+            {
+                <tr>
+                    <td>@r.TicketId</td>
+                    <td>
+                        @r.CustomerName
+                        <br /><span style="font-size:0.75rem;color:var(--muted);">@r.CustomerAddress</span>
+                    </td>
+                    <td>@r.ContactNumber</td>
+                    <td>@r.MovieName</td>
+                    <td>@r.TheaterName</td>
+                    <td>@r.HallName</td>
+                    <td>@(r.ShowTiming?.ToString("MMM dd, yyyy HH:mm") ?? "-")</td>
+                    <td>@r.SeatNo</td>
+                    <td>
+                        <span style="padding:3px 10px;border-radius:20px;font-size:0.8rem;
+                            background:@(r.TicketStatus=="BOOKED"?"#1a3a1a":r.TicketStatus=="CANCELLED"?"#3a1a1a":"#2a2a1a");
+                            color:@(r.TicketStatus=="BOOKED"?"#4caf50":r.TicketStatus=="CANCELLED"?"#e63946":"#ffc107");">
+                            @r.TicketStatus
+                        </span>
+                    </td>
+                    <td>@(r.PolicyName ?? "-")</td>
+                    <td style="font-weight:600;">@(r.TicketPrice.HasValue ? "Rs " + r.TicketPrice.Value : "-")</td>
+                    <td>@(r.BookingTime?.ToString("MMM dd, yyyy HH:mm") ?? "-")</td>
+                    <td>@(r.PurchaseTime?.ToString("MMM dd, yyyy HH:mm") ?? "-")</td>
+                    <td class="actions">
+                        <a href="/Ticket/Edit/@r.TicketId" class="btn btn-secondary">Edit</a>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="14" style="text-align:center;color:var(--muted);padding:2rem;">
+                    No ticket records found. Add tickets from the <a href="/Ticket/Create">Tickets page</a>.
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

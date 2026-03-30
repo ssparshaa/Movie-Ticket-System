@@ -1,0 +1,197 @@
+@model MovieTicketAppFinal.Models.Ticket
+@{
+    ViewData["Title"] = "Edit Ticket";
+    var customers = ViewBag.Customers as List<MovieTicketAppFinal.Models.Customer>;
+    var movies = ViewBag.Movies as List<MovieTicketAppFinal.Models.Movie>;
+    var shows = ViewBag.Shows as List<MovieTicketAppFinal.Models.ShowOption>;
+    int currentCustomerId = ViewBag.CurrentCustomerId ?? 0;
+    int currentMovieId = ViewBag.CurrentMovieId ?? 0;
+    int currentShowId = ViewBag.CurrentShowId ?? 0;
+}
+
+<h1>Edit Ticket #@Model.TicketId</h1>
+
+@if (TempData["Error"] != null)
+{
+    <p style="color:red;font-weight:bold;margin-bottom:1rem;">@TempData["Error"]</p>
+}
+
+<div class="form-card">
+    <form method="post" action="/Ticket/Edit/@Model.TicketId">
+        <input type="hidden" name="TicketId" value="@Model.TicketId" />
+
+        <div class="form-group">
+            <label>Ticket ID</label>
+            <input type="number" value="@Model.TicketId" disabled />
+        </div>
+
+        <div class="form-group">
+            <label>Customer <span style="color:red;">*</span></label>
+            <select name="customerId" required>
+                <option value="">-- Select Customer --</option>
+                @if (customers != null)
+                {
+                    @foreach (var c in customers)
+                    {
+                        if (c.CustomerId == currentCustomerId)
+                        {
+                            <option value="@c.CustomerId" selected>@c.CustomerName</option>
+                        }
+                        else
+                        {
+                            <option value="@c.CustomerId">@c.CustomerName</option>
+                        }
+                    }
+                }
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Movie <span style="color:red;">*</span></label>
+            <select name="movieId" id="movieId" required>
+                <option value="">-- Select Movie --</option>
+                @if (movies != null)
+                {
+                    @foreach (var m in movies)
+                    {
+                        if (m.MovieId == currentMovieId)
+                        {
+                            <option value="@m.MovieId" selected>@m.MovieName</option>
+                        }
+                        else
+                        {
+                            <option value="@m.MovieId">@m.MovieName</option>
+                        }
+                    }
+                }
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Show Time <span style="color:red;">*</span></label>
+            <select name="showId" id="showId" required>
+                <option value="" data-movie="">-- Select Showtime --</option>
+                @if (shows != null)
+                {
+                    @foreach (var s in shows)
+                    {
+                        if (s.ShowId == currentShowId)
+                        {
+                            <option value="@s.ShowId" data-movie="@s.MovieId" selected>@s.DisplayText</option>
+                        }
+                        else
+                        {
+                            <option value="@s.ShowId" data-movie="@s.MovieId">@s.DisplayText</option>
+                        }
+                    }
+                }
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Status</label>
+            <select name="TicketStatus" id="statusSelect" required>
+                @if (Model.TicketStatus == "BOOKED")
+                {
+                    <option value="BOOKED" selected>BOOKED</option>
+                }
+                else
+                {
+                    <option value="BOOKED">BOOKED</option>
+                }
+                @if (Model.TicketStatus == "PURCHASED")
+                {
+                    <option value="PURCHASED" selected>PURCHASED</option>
+                }
+                else
+                {
+                    <option value="PURCHASED">PURCHASED</option>
+                }
+                @if (Model.TicketStatus == "CANCELLED")
+                {
+                    <option value="CANCELLED" selected>CANCELLED</option>
+                }
+                else
+                {
+                    <option value="CANCELLED">CANCELLED</option>
+                }
+            </select>
+        </div>
+
+        <div class="form-group" id="cancelReasonGroup" style="display:@(Model.TicketStatus == "CANCELLED" ? "" : "none");">
+            <label>Cancellation Reason</label>
+            <input type="text" name="CancellationReason" placeholder="Reason for cancellation" />
+        </div>
+
+        <div class="form-group">
+            <label>Seat No</label>
+            <input type="text" name="SeatNo" value="@Model.SeatNo" />
+        </div>
+
+        <div class="form-group">
+            <label>Booking Time</label>
+            <input type="datetime-local" name="TicketBookingTime"
+                   value="@(Model.TicketBookingTime?.ToString("yyyy-MM-ddTHH:mm") ?? "")" />
+        </div>
+
+        <div class="form-group" id="purchaseTimeGroup" style="display:@(Model.TicketStatus == "PURCHASED" ? "" : "none");">
+            <label>Purchase Time</label>
+            <input type="datetime-local" name="TicketPurchaseTime" id="purchaseTime"
+                   value="@(Model.TicketPurchaseTime?.ToString("yyyy-MM-ddTHH:mm") ?? "")" />
+        </div>
+
+        <div class="actions">
+            <button type="submit" class="btn btn-primary">Update</button>
+            <a href="/Ticket" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+
+<script>
+    const movieSel = document.getElementById('movieId');
+    const showSel = document.getElementById('showId');
+    const allShowOptions = Array.from(showSel.options).slice(1);
+    const savedShowId = @currentShowId;
+
+    function filterShows() {
+        const movieId = parseInt(movieSel.value) || 0;
+        while (showSel.options.length > 1) showSel.remove(1);
+
+        if (movieId === 0) {
+            showSel.options[0].text = '-- Select Movie first --';
+            return;
+        }
+
+        showSel.options[0].text = '-- Select Showtime --';
+        allShowOptions.forEach(opt => {
+            const optMovie = parseInt(opt.dataset.movie) || 0;
+            if (optMovie === movieId) showSel.appendChild(opt.cloneNode(true));
+        });
+
+        const saved = showSel.querySelector('option[value="' + savedShowId + '"]');
+        if (saved) showSel.value = String(savedShowId);
+    }
+
+    movieSel.addEventListener('change', filterShows);
+    filterShows();
+
+    // Show/hide purchase time and cancel reason based on status
+    const statusSelect = document.getElementById('statusSelect');
+    const purchaseGroup = document.getElementById('purchaseTimeGroup');
+    const purchaseTime = document.getElementById('purchaseTime');
+    const cancelGroup = document.getElementById('cancelReasonGroup');
+
+    statusSelect.addEventListener('change', function () {
+        if (this.value === 'PURCHASED') {
+            purchaseGroup.style.display = '';
+            if (!purchaseTime.value) {
+                const now = new Date();
+                const pad = n => String(n).padStart(2, '0');
+                purchaseTime.value = `${now.getFullYear()}-${pad(now.getMonth()+1)}-${pad(now.getDate())}T${pad(now.getHours())}:${pad(now.getMinutes())}`;
+            }
+        } else {
+            purchaseGroup.style.display = 'none';
+        }
+        cancelGroup.style.display = this.value === 'CANCELLED' ? '' : 'none';
+    });
+</script>

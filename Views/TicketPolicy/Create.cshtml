@@ -1,0 +1,16 @@
+@model MovieTicketAppFinal.Models.TicketPolicy
+@{ ViewData["Title"] = "Add Ticket Policy"; }
+<h1>Add Ticket Policy</h1>
+<div asp-validation-summary="All" class="text-danger" style="margin-bottom:1rem;"></div>
+<div class="form-card">
+    <form method="post">
+        <div class="form-group"><label>Policy ID</label><input type="number" name="TicketPolicyId" required /></div>
+        <div class="form-group"><label>Policy Name</label><input type="text" name="TicketPaymentPolicy" placeholder="e.g. Weekend Ticket, Holiday Ticket" required /></div>
+        <div class="form-group"><label>Ticket Base Price </label> <input type="number" step="0.01" name="TicketBasePrice" min="1" required /></div>
+        <div class="form-group"><label>Ticket Policy Price </label><input type="number" step="0.01" name="TicketPolicyPrice" min="1" /></div>
+        <div class="actions">
+            <button type="submit" class="btn btn-primary">Save</button>
+            <a href="/TicketPolicy" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>

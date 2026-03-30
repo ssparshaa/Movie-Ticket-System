@@ -1,0 +1,68 @@
+@model MovieTicketAppFinal.Models.Show
+@{
+    ViewData["Title"] = "Add Showtime";
+    var movies = ViewBag.Movies as List<MovieTicketAppFinal.Models.Movie>;
+    var halls = ViewBag.Halls as List<MovieTicketAppFinal.Models.Hall>;
+    var policies = ViewBag.Policies as List<MovieTicketAppFinal.Models.TicketPolicy>;
+}
+<h1>Add Showtime</h1>
+<div asp-validation-summary="All" class="text-danger" style="margin-bottom:1rem;"></div>
+<div class="form-card">
+    <form method="post">
+        <div class="form-group">
+            <label>Show ID</label>
+            <input type="number" name="ShowId" required />
+        </div>
+        <div class="form-group">
+            <label>Movie <span style="color:red;">*</span></label>
+            <select name="MovieId" required>
+                <option value="">-- Select Movie --</option>
+                @if (movies != null)
+                {
+                    @foreach (var m in movies)
+                    {
+                        <option value="@m.MovieId">@m.MovieName</option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Hall <span style="color:red;">*</span></label>
+            <select name="HallId" required>
+                <option value="">-- Select Hall --</option>
+                @if (halls != null)
+                {
+                    @foreach (var h in halls)
+                    {
+                        <option value="@h.HallId">@h.HallName</option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Ticket Policy</label>
+            <select name="ticketPolicyId">
+                <option value="0">-- No Policy --</option>
+                @if (policies != null)
+                {
+                    @foreach (var p in policies)
+                    {
+                        <option value="@p.TicketPolicyId">@p.TicketPaymentPolicy — Base: Rs @p.TicketBasePrice | Price: Rs @p.TicketPolicyPrice</option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Show Timing</label>
+            <input type="datetime-local" name="ShowTiming" />
+        </div>
+        <div class="form-group">
+            <label>Duration (minutes)</label>
+            <input type="number" name="ShowDuration" />
+        </div>
+        <div class="actions">
+            <button type="submit" class="btn btn-primary">Save</button>
+            <a href="/Show" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>

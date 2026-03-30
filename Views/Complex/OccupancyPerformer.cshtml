@@ -1,0 +1,77 @@
+@{
+    var movies = ViewBag.Movies as List<MovieTicketAppFinal.Models.Movie>;
+    var results = ViewBag.OccupancyResults as List<MovieTicketAppFinal.Models.OccupancyResult>;
+    ViewData["Title"] = "Movie Occupancy Performer";
+}
+
+<h1>Top 3 Theater Occupancy Performers</h1>
+<p style="color:var(--muted);margin-bottom:1rem;">
+    Select a movie to see the top 3 theater halls with the highest seat occupancy based on purchased tickets only.
+</p>
+
+<div class="form-card">
+    <form method="post">
+        <div class="form-group">
+            <label>Select Movie <span style="color:red;">*</span></label>
+            <select name="movieId" required>
+                <option value="">-- Select Movie --</option>
+                @if (movies != null)
+                {
+                    @foreach (var m in movies)
+                    {
+                        if (ViewBag.SelectedMovieId != null && (int)ViewBag.SelectedMovieId == m.MovieId)
+                        {
+                            <option value="@m.MovieId" selected>@m.MovieName</option>
+                        }
+                        else
+                        {
+                            <option value="@m.MovieId">@m.MovieName</option>
+                        }
+                    }
+                }
+            </select>
+        </div>
+        <div class="actions">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+    </form>
+</div>
+
+@if (results != null)
+{
+    if (!results.Any())
+    {
+        <p style="color:var(--muted);margin-top:1.5rem;">No purchased ticket data found for this movie.</p>
+    }
+    else
+    {
+        <h2 style="margin-top:2rem;">Top Performing Halls</h2>
+        <div style="display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:1rem;">
+            @foreach (var r in results)
+            {
+                var medalColor = r.Rank == 1 ? "#FFD700" : r.Rank == 2 ? "#C0C0C0" : "#CD7F32";
+                var medalLabel = r.Rank == 1 ? "1st" : r.Rank == 2 ? "2nd" : "3rd";
+                <div class="form-card" style="flex:1;min-width:220px;border-top:4px solid @medalColor;">
+                    <div style="font-size:1.5rem;font-weight:700;color:@medalColor;margin-bottom:0.5rem;">@medalLabel</div>
+                    <div style="font-size:1.1rem;font-weight:600;">@r.TheaterName</div>
+                    <div style="color:var(--muted);margin-bottom:1rem;">@r.HallName</div>
+                    <div style="display:flex;justify-content:space-between;margin-bottom:0.4rem;">
+                        <span style="color:var(--muted);">Capacity</span>
+                        <strong>@r.HallCapacity seats</strong>
+                    </div>
+                    <div style="display:flex;justify-content:space-between;margin-bottom:0.4rem;">
+                        <span style="color:var(--muted);">Paid Tickets</span>
+                        <strong>@r.PaidTickets</strong>
+                    </div>
+                    <div style="display:flex;justify-content:space-between;margin-bottom:0.8rem;">
+                        <span style="color:var(--muted);">Occupancy</span>
+                        <strong style="color:@medalColor;">@r.OccupancyPct%</strong>
+                    </div>
+                    <div style="background:rgba(255,255,255,0.1);border-radius:999px;height:8px;overflow:hidden;">
+                        <div style="width:@(r.OccupancyPct)%;background:@medalColor;height:100%;border-radius:999px;"></div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+}

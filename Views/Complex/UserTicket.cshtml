@@ -1,0 +1,79 @@
+@{
+    ViewData["Title"] = "User Ticket History";
+    var customers = ViewBag.Customers as List<MovieTicketAppFinal.Models.Customer>;
+    var results = ViewBag.TicketResults as List<MovieTicketAppFinal.Models.UserTicketResult>;
+}
+<h1>User Ticket History</h1>
+<p style="color:var(--muted);margin-bottom:1rem;">Select a user to see their tickets (booked or purchased) in the last 6 months.</p>
+<div class="form-card" style="margin-bottom:2rem;">
+    <form method="post" action="/Complex/UserTicket">
+        <div class="form-group">
+            <label>Select User (Customer)</label>
+            <select name="customerId" required>
+                <option value="">-- Select Customer --</option>
+                @if (customers != null)
+                {
+                    @foreach (var c in customers)
+                    {
+                        if (ViewBag.SelectedCustomerId != null && (int)ViewBag.SelectedCustomerId == c.CustomerId)
+                        { <option value="@c.CustomerId" selected>@c.CustomerName</option> }
+                        else
+                        { <option value="@c.CustomerId">@c.CustomerName</option> }
+                    }
+                }
+            </select>
+        </div>
+        <div class="actions">
+            <button type="submit" class="btn btn-primary">Show Tickets</button>
+        </div>
+    </form>
+</div>
+
+@if (results != null)
+{
+    if (results.Any())
+    {
+        <h2 style="font-size:1.2rem;margin-bottom:0.75rem;">Ticket details (last 6 months)</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Customer</th>
+                    <th>Address</th>
+                    <th>Contact</th>
+                    <th>Ticket ID</th>
+                    <th>Status</th>
+                    <th>Seat</th>
+                    <th>Booking Time</th>
+                    <th>Purchase Time</th>
+                    <th>Movie</th>
+                    <th>Theater</th>
+                    <th>Hall</th>
+                    <th>Show Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var r in results)
+                {
+                    <tr>
+                        <td>@r.CustomerName</td>
+                        <td>@r.CustomerAddress</td>
+                        <td>@r.ContactNumber</td>
+                        <td>@r.TicketId</td>
+                        <td><span style="padding:3px 10px;border-radius:20px;font-size:0.8rem;background:@(r.TicketStatus=="BOOKED"?"#1a3a1a":r.TicketStatus=="CANCELLED"?"#3a1a1a":"#2a2a1a");color:@(r.TicketStatus=="BOOKED"?"#4caf50":r.TicketStatus=="CANCELLED"?"#e63946":"#ffc107");">@r.TicketStatus</span></td>
+                        <td>@r.SeatNo</td>
+                        <td>@(r.BookingTime?.ToString("MMM dd, yyyy HH:mm") ?? "-")</td>
+                        <td>@(r.PurchaseTime?.ToString("MMM dd, yyyy HH:mm") ?? "-")</td>
+                        <td>@r.MovieName</td>
+                        <td>@r.TheaterName</td>
+                        <td>@r.HallName</td>
+                        <td>@(r.ShowTiming?.ToString("MMM dd, HH:mm") ?? "-")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p style="color:var(--muted);">No tickets found for this user in the last 6 months (or customer has no linked tickets in CUSTOMERTICKET3).</p>
+    }
+}

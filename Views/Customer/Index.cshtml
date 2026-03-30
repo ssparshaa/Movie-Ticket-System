@@ -1,0 +1,30 @@
+@model List<MovieTicketAppFinal.Models.Customer>
+@{ ViewData["Title"] = "Customers"; }
+<div class="top-bar">
+    <h1>Customers</h1>
+    <a href="/Customer/Create" class="btn btn-primary">+ Add Customer</a>
+</div>
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">@TempData["Error"]</div>
+}
+<table>
+    <thead><tr><th>ID</th><th>Name</th><th>Address</th><th>Contact</th><th>Actions</th></tr></thead>
+    <tbody>
+    @foreach (var c in Model)
+    {
+        <tr>
+            <td>@c.CustomerId</td>
+            <td>@c.CustomerName</td>
+            <td>@c.CustomerAddress</td>
+            <td>@c.CustomerContactNumber</td>
+            <td class="actions">
+                <a href="/Customer/Edit/@c.CustomerId" class="btn btn-secondary">Edit</a>
+                <form method="post" action="/Customer/Delete/@c.CustomerId" style="display:inline">
+                    <button type="submit" class="btn btn-danger" onclick="return confirm('Delete this customer?')">Delete</button>
+                </form>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

@@ -1,0 +1,30 @@
+@model List<MovieTicketAppFinal.Models.TicketPolicy>
+@{ ViewData["Title"] = "Ticket Policies"; }
+<div class="top-bar">
+    <h1>Ticket Policies</h1>
+    <a href="/TicketPolicy/Create" class="btn btn-primary">+ Add Policy</a>
+</div>
+@if (TempData["Error"] != null)
+{
+    <p style="color:red;font-weight:bold;margin-bottom:1rem;">@TempData["Error"]</p>
+}
+<table>
+    <thead><tr><th>ID</th><th>Policy Name</th><th>Base Price (Rs)</th><th>Policy Price (Rs)</th><th>Actions</th></tr></thead>
+    <tbody>
+    @foreach (var p in Model)
+    {
+        <tr>
+            <td>@p.TicketPolicyId</td>
+            <td>@p.TicketPaymentPolicy</td>
+            <td>@p.TicketBasePrice</td>
+            <td>@p.TicketPolicyPrice</td>
+            <td class="actions">
+                <a href="/TicketPolicy/Edit/@p.TicketPolicyId" class="btn btn-secondary">Edit</a>
+                <form method="post" action="/TicketPolicy/Delete/@p.TicketPolicyId" style="display:inline">
+                    <button type="submit" class="btn btn-danger" onclick="return confirm('Delete this policy?')">Delete</button>
+                </form>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

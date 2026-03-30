@@ -1,0 +1,16 @@
+@model MovieTicketAppFinal.Models.Theater
+@{ ViewData["Title"] = "Edit Theater"; }
+<h1>Edit Theater</h1>
+<div asp-validation-summary="All" class="text-danger" style="margin-bottom:1rem;"></div>
+<div class="form-card">
+    <form method="post">
+        <input type="hidden" name="TheatreId" value="@Model.TheatreId" />
+        <div class="form-group"><label>Theater ID</label><input type="number" value="@Model.TheatreId" disabled /></div>
+        <div class="form-group"><label>Name</label><input type="text" name="TheatreName" value="@Model.TheatreName" required /></div>
+        <div class="form-group"><label>Address</label><input type="text" name="TheatreAddress" value="@Model.TheatreAddress" /></div>
+        <div class="actions">
+            <button type="submit" class="btn btn-primary">Update</button>
+            <a href="/Theater" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,16 @@
+@model MovieTicketAppFinal.Models.Customer
+@{ ViewData["Title"] = "Edit Customer"; }
+<h1>Edit Customer</h1>
+<div class="form-card">
+    <form method="post">
+        <input type="hidden" name="CustomerId" value="@Model.CustomerId" />
+        <div class="form-group"><label>Customer ID</label><input type="number" value="@Model.CustomerId" disabled /></div>
+        <div class="form-group"><label>Name</label><input type="text" name="CustomerName" value="@Model.CustomerName" required /></div>
+        <div class="form-group"><label>Address</label><input type="text" name="CustomerAddress" value="@Model.CustomerAddress" /></div>
+        <div class="form-group"><label>Contact</label><input type="text" name="CustomerContactNumber" value="@Model.CustomerContactNumber" /></div>
+        <div class="actions">
+            <button type="submit" class="btn btn-primary">Update</button>
+            <a href="/Customer" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>

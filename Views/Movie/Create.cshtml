@@ -1,0 +1,39 @@
+@model MovieTicketAppFinal.Models.Movie
+@{ ViewData["Title"] = "Add Movie"; }
+<h1>Add Movie</h1>
+<div class="form-card">
+    <form method="post" asp-action="Create">
+        <div asp-validation-summary="All" class="text-danger" style="margin-bottom:1rem;"></div>
+        <div class="form-group">
+            <label>Movie ID</label>
+            <input type="number" name="MovieId" value="@Model.MovieId" required />
+            <span id="id-error" style="color:var(--red);font-size:0.85rem;display:none;">This Movie ID already exists.</span>
+        </div>
+        <div class="form-group"><label>Movie Name</label><input type="text" name="MovieName" value="@Model.MovieName" required /></div>
+        <div class="form-group"><label>Genre</label><input type="text" name="MovieGenre" value="@Model.MovieGenre" /></div>
+        <div class="form-group"><label>Language</label><input type="text" name="MovieLanguage" value="@Model.MovieLanguage" /></div>
+        <div class="form-group"><label>Duration (minutes)</label><input type="number" name="MovieDuration" value="@Model.MovieDuration" /></div>
+        <div class="form-group"><label>Release Date</label><input type="date" name="MovieReleaseDate" value="@(Model.MovieReleaseDate?.ToString("yyyy-MM-dd") ?? "")" /></div>
+        <div class="actions">
+            <button type="submit" class="btn btn-primary">Save</button>
+            <a href="/Movie" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+
+<script>
+// Client-side duplicate ID check
+document.querySelector('form').addEventListener('submit', async function(e) {
+    const id = document.querySelector('input[name="MovieId"]').value;
+    if (!id) return;
+    const resp = await fetch('/Movie/CheckId?id=' + id);
+    const exists = await resp.json();
+    const errSpan = document.getElementById('id-error');
+    if (exists) {
+        e.preventDefault();
+        errSpan.style.display = 'block';
+    } else {
+        errSpan.style.display = 'none';
+    }
+});
+</script>

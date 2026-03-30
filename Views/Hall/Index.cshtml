@@ -1,0 +1,35 @@
+@model List<MovieTicketAppFinal.Models.Hall>
+@{
+    ViewData["Title"] = "Halls";
+    var theaterNames = ViewBag.TheaterNames as Dictionary<int, string>;
+}
+<div class="top-bar">
+    <h1>Halls</h1>
+    <a href="/Hall/Create" class="btn btn-primary">+ Add Hall</a>
+</div>
+@if (TempData["Error"] != null)
+{
+    <p style="color:red;font-weight:bold;margin-bottom:1rem;">@TempData["Error"]</p>
+}
+<table>
+    <thead>
+    <tr><th>ID</th><th>Theatre</th><th>Name</th><th>Capacity</th><th>Actions</th></tr>
+    </thead>
+    <tbody>
+    @foreach (var h in Model)
+    {
+        <tr>
+            <td>@h.HallId</td>
+            <td>@(theaterNames != null && theaterNames.ContainsKey(h.TheatreId) ? theaterNames[h.TheatreId] : "-")</td>
+            <td>@h.HallName</td>
+            <td>@h.HallCapacity</td>
+            <td class="actions">
+                <a href="/Hall/Edit/@h.HallId" class="btn btn-secondary">Edit</a>
+                <form method="post" action="/Hall/Delete/@h.HallId" style="display:inline">
+                    <button type="submit" class="btn btn-danger" onclick="return confirm('Delete this hall?')">Delete</button>
+                </form>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

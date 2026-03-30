@@ -1,0 +1,59 @@
+@model List<MovieTicketAppFinal.Models.Ticket>
+@{
+    ViewData["Title"] = "Tickets";
+    var customerByTicketId = ViewBag.CustomerByTicketId as Dictionary<int, string>;
+    var showTextByTicketId = ViewBag.ShowTextByTicketId as Dictionary<int, string>;
+}
+<div class="top-bar">
+    <h1>Tickets</h1>
+    <span>
+        <a href="/Ticket/TicketOverview" class="btn btn-secondary">Ticket Overview</a>
+        <a href="/Ticket/Create" class="btn btn-primary">+ Add Ticket</a>
+    </span>
+</div>
+@if (TempData["Error"] != null)
+{
+    <p style="color:red;font-weight:bold;margin-bottom:1rem;">@TempData["Error"]</p>
+}
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Customer</th>
+            <th>Show</th>
+            <th>Status</th>
+            <th>Seat</th>
+            <th>Booking Time</th>
+            <th>Purchase Time</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var t in Model)
+    {
+        var custName = (customerByTicketId != null && customerByTicketId.ContainsKey(t.TicketId)) ? customerByTicketId[t.TicketId] : "-";
+        var showText = (showTextByTicketId != null && showTextByTicketId.ContainsKey(t.TicketId)) ? showTextByTicketId[t.TicketId] : "-";
+        <tr>
+            <td>@t.TicketId</td>
+            <td>@custName</td>
+            <td style="max-width:220px;font-size:0.85rem;">@showText</td>
+            <td>
+                <span style="padding:3px 10px;border-radius:20px;font-size:0.8rem;
+                    background:@(t.TicketStatus=="BOOKED"?"#1a3a1a":t.TicketStatus=="CANCELLED"?"#3a1a1a":"#2a2a1a");
+                    color:@(t.TicketStatus=="BOOKED"?"#4caf50":t.TicketStatus=="CANCELLED"?"#e63946":"#ffc107");">
+                    @t.TicketStatus
+                </span>
+            </td>
+            <td>@t.SeatNo</td>
+            <td>@(t.TicketBookingTime.HasValue ? t.TicketBookingTime.Value.ToString("MMM dd, yyyy HH:mm") : "-")</td>
+            <td>@(t.TicketPurchaseTime.HasValue ? t.TicketPurchaseTime.Value.ToString("MMM dd, yyyy HH:mm") : "-")</td>
+            <td class="actions">
+                <a href="/Ticket/Edit/@t.TicketId" class="btn btn-secondary">Edit</a>
+                <form method="post" action="/Ticket/Delete/@t.TicketId" style="display:inline">
+                    <button type="submit" class="btn btn-danger" onclick="return confirm('Delete this ticket and all related records?')">Delete</button>
+                </form>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

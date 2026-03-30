@@ -1,0 +1,29 @@
+@model List<MovieTicketAppFinal.Models.Theater>
+@{ ViewData["Title"] = "Theaters"; }
+<div class="top-bar">
+    <h1>Theaters</h1>
+    <a href="/Theater/Create" class="btn btn-primary">+ Add Theater</a>
+</div>
+@if (TempData["Error"] != null)
+{
+    <p style="color:red;font-weight:bold;margin-bottom:1rem;">@TempData["Error"]</p>
+}
+<table>
+    <thead><tr><th>ID</th><th>Name</th><th>Address</th><th>Actions</th></tr></thead>
+    <tbody>
+    @foreach (var t in Model)
+    {
+        <tr>
+            <td>@t.TheatreId</td>
+            <td>@t.TheatreName</td>
+            <td>@t.TheatreAddress</td>
+            <td class="actions">
+                <a href="/Theater/Edit/@t.TheatreId" class="btn btn-secondary">Edit</a>
+                <form method="post" action="/Theater/Delete/@t.TheatreId" style="display:inline">
+                    <button type="submit" class="btn btn-danger" onclick="return confirm('Delete this theater?')">Delete</button>
+                </form>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
