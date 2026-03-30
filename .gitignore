@@ -1,0 +1,29 @@
+## Local / private notes (do not push)
+BUSINESS_RULES_DDL.md
+
+## Build
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+## User-specific / IDE
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+.vs/
+.idea/
+*.DotSettings.user
+
+## OS
+.DS_Store
+Thumbs.db
+
+## NuGet
+*.nupkg
+**/packages/*
+!**/packages/build/
+
+## Rider
+*.sln.iml
